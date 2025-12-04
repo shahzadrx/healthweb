@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedRep - Blood Report Analysis & Drug Safety Checker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Malayalam:wght@400;700&family=Noto+Sans+Kannada:wght@400;700&family=Inter:wght@400;500;600;700&display=swap');
+        
+        .font-malayalam { font-family: 'Noto Sans Malayalam', sans-serif; }
+        .font-kannada { font-family: 'Noto Sans Kannada', sans-serif; }
+        .font-english { font-family: 'Inter', sans-serif; }
+        
+        .tool-section {
+            transition: all 0.3s ease;
+        }
+        
+        .tool-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="font-english bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-heartbeat text-blue-600 text-2xl"></i>
+                    <h1 class="text-xl font-bold text-gray-900">Health Tools</h1>
+                </div>
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="#blood-analysis" class="text-gray-600 hover:text-blue-600 transition-colors">Blood Analysis</a>
+                    <a href="#drug-safety" class="text-gray-600 hover:text-green-600 transition-colors">Drug Safety</a>
+                    <button class="text-gray-600 hover:text-gray-900">
+                        <i class="fas fa-info-circle text-xl"></i>
+                    </button>
+                    <button class="text-gray-600 hover:text-gray-900">
+                        <i class="fas fa-cog text-xl"></i>
+                    </button>
+                </nav>
+                <button class="md:hidden text-gray-600" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-2 space-y-2">
+                <a href="#blood-analysis" class="block py-2 text-gray-600 hover:text-blue-600">Blood Analysis</a>
+                <a href="#drug-safety" class="block py-2 text-gray-600 hover:text-green-600">Drug Safety</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="min-h-screen">
+        <!-- Hero Section -->
+        <section class="gradient-bg text-white py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="fade-in">
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6">
+                        Your Personal Health Companion
+                    </h1>
+                    <p class="text-xl md:text-2xl mb-8 opacity-90">
+                        Comprehensive health tools for better wellbeing
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="#blood-analysis" class="bg-white text-purple-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                            <i class="fas fa-vial mr-2"></i>Blood Analysis
+                        </a>
+                        <a href="#drug-safety" class="bg-white text-green-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                            <i class="fas fa-shield-alt mr-2"></i>Drug Safety
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blood Report Analysis Tool -->
+        <section id="blood-analysis" class="py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                        <i class="fas fa-vial text-blue-600 mr-3"></i>Blood Report Analysis
+                    </h2>
+                    <p class="text-xl text-gray-600">
+                        Understand your blood test results in simple terms
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8 items-center">
+                    <div class="tool-section bg-white rounded-xl p-8 card-shadow">
+                        <div class="space-y-6">
+                            <div>
+                                <h3 class="text-2xl font-bold text-gray-900 mb-4">Upload Your Blood Report</h3>
+                                <p class="text-gray-600 mb-6">
+                                    Upload your blood test results for detailed analysis and health insights
+                                </p>
+                            </div>
+                            
+                            <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center hover:border-blue-400 transition-colors">
+                                <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-4"></i>
+                                <p class="text-gray-600 mb-4">Drag and drop your blood report here</p>
+                                <button class="bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                                    Choose File
+                                </button>
+                                <p class="text-sm text-gray-500 mt-2">Supports PDF, JPG, PNG</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="bg-blue-50 rounded-xl p-6">
+                            <h4 class="text-lg font-semibold text-blue-900 mb-3">
+                                <i class="fas fa-check-circle mr-2"></i>What You'll Get
+                            </h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-language text-blue-600 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">Multi-language support (English, Malayalam, Kannada)</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-blue-600 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">Easy-to-understand explanations</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-blue-600 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">Personalized lifestyle recommendations</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check-circle text-blue-600 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">Elderly-friendly interface</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-green-50 rounded-xl p-6">
+                            <h4 class="text-lg font-semibold text-green-900 mb-3">
+                                <i class="fas fa-shield-alt mr-2"></i>Privacy First
+                            </h4>
+                            <p class="text-gray-700">
+                                Your data is processed locally and never stored on our servers. Your privacy is our priority.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Drug Safety Checker Tool -->
+        <section id="drug-safety" class="py-16 bg-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                        <i class="fas fa-shield-alt text-green-600 mr-3"></i>Drug Safety Checker
+                    </h2>
+                    <p class="text-xl text-gray-600">
+                        Ensure medication safety with comprehensive interaction checking
+                    </p>
+                </div>
+
+                <div class="grid lg:grid-cols-2 gap-8 items-center">
+                    <div class="order-2 lg:order-1">
+                        <div class="tool-section bg-white rounded-xl p-8 card-shadow">
+                            <div class="space-y-6">
+                                <div>
+                                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Enter Medication Details</h3>
+                                    <p class="text-gray-600 mb-6">
+                                        Add your medications to check for interactions and calculate proper dosages
+                                    </p>
+                                </div>
+                                
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Medication Name</label>
+                                        <input type="text" placeholder="Enter medication name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                    </div>
+                                    
+                                    <div class="grid md:grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Dosage (mg)</label>
+                                            <input type="number" placeholder="500" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-medium text-gray-700 mb-2">Frequency</label>
+                                            <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                                <option>Daily</option>
+                                                <option>Twice daily</option>
+                                                <option>Three times daily</option>
+                                                <option>As needed</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Age</label>
+                                        <input type="number" placeholder="65" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                    </div>
+                                    
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Weight (kg)</label>
+                                        <input type="number" placeholder="70" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                    </div>
+                                    
+                                    <button class="w-full bg-green-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-green-700 transition-colors">
+                                        <i class="fas fa-search mr-2"></i>Check Safety & Calculate
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="order-1 lg:order-2 space-y-6">
+                        <div class="bg-green-50 rounded-xl p-6">
+                            <h4 class="text-lg font-semibold text-green-900 mb-3">
+                                <i class="fas fa-check-circle mr-2"></i>Features
+                            </h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-start">
+                                    <i class="fas fa-pills text-green-600 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">Drug-drug interaction checking</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-utensils text-green-600 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">Drug-food interaction analysis</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-calculator text-green-600 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">Accurate dose calculations</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-clock text-green-600 mr-3 mt-1"></i>
+                                    <span class="text-gray-700">Timing recommendations</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-red-50 rounded-xl p-6">
+                            <h4 class="text-lg font-semibold text-red-900 mb-3">
+                                <i class="fas fa-exclamation-triangle mr-2"></i>Important Notice
+                            </h4>
+                            <p class="text-gray-700">
+                                This tool provides general guidance only. Always consult with a qualified healthcare provider before making any changes to your medication.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                        Why Choose Our Health Tools?
+                    </h2>
+                    <p class="text-xl text-gray-600">
+                        Trusted by thousands for health insights and safety
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="text-center p-6">
+                        <div class="bg-blue-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-user-shield text-blue-600 text-3xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-3">Privacy First</h4>
+                        <p class="text-gray-600">Your data is processed locally and never stored on our servers</p>
+                    </div>
+                    
+                    <div class="text-center p-6">
+                        <div class="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-language text-green-600 text-3xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-3">Multi-Language</h4>
+                        <p class="text-gray-600">Available in English, Malayalam, and Kannada</p>
+                    </div>
+                    
+                    <div class="text-center p-6">
+                        <div class="bg-purple-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-mobile-alt text-purple-600 text-3xl"></i>
+                        </div>
+                        <h4 class="font-semibold text-gray-900 mb-3">Mobile Friendly</h4>
+                        <p class="text-gray-600">Works perfectly on all devices and screen sizes</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <div class="mb-6">
+                        <i class="fas fa-heartbeat text-blue-400 text-3xl"></i>
+                    </div>
+                    <p class="text-lg mb-4">
+                        <i class="fas fa-exclamation-triangle mr-2"></i>
+                        This tool provides general information and is not a substitute for professional medical advice. 
+                        Always consult with a qualified healthcare provider for diagnosis and treatment.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center text-sm text-gray-400">
+                        <span>© 2025 Health Tools</span>
+                        <span>•</span>
+                        <span>Privacy First</span>
+                        <span>•</span>
+                        <span>Local Processing</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('mobileMenu').classList.add('hidden');
+                }
+            });
+        });
+
+        // Add fade-in animation to elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe all tool sections
+            document.querySelectorAll('.tool-section').forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        // File upload handling (placeholder)
+        document.querySelector('.border-dashed').addEventListener('click', function() {
+            alert('File upload functionality would be implemented here. This is a demo interface.');
+        });
+
+        // Form submission handling (placeholder)
+        document.querySelector('#drug-safety button').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Drug safety analysis would be performed here. This is a demo interface.');
+        });
+    </script>
+</body>
+</html>
